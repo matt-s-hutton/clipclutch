@@ -1,6 +1,13 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
+  "include": [
+    ".eslintrc.js",
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "./tsconfig.json"
+  ],
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",

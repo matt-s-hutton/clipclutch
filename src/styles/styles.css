@@ -1,0 +1,23 @@
+@import url('_variables.css');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--FF);
+}
+
+.card {
+    background-color: var(--CARD_BG);
+    box-shadow: 3px 3px 5px rgb(207, 207, 207);
+    border-radius: var(--CARD_BORDER_RADIUS);
+}
+
+.card-title {
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--CARD_TITLE);
+    flex-basis: 100%;
+    border-radius: var(--CARD_BORDER_RADIUS) var(--CARD_BORDER_RADIUS) 0 0;
+    padding: .5rem 0;
+}

@@ -1,0 +1,89 @@
+#options-card {
+    display: flex;
+}
+
+#options-card > h3 {
+    background-color: var(--OPTIONS_TITLE_BG);
+    color: var(--CARD_TITLE);
+    font-family: var(--FF_CONTROL_HEAD);
+    text-transform: uppercase;
+    text-align: center;
+    writing-mode: vertical-lr;
+    text-orientation: sideways;
+    padding: 0 1rem 0 1rem;
+    border-radius: var(--CARD_BORDER_RADIUS) 0 0 var(--CARD_BORDER_RADIUS);
+}
+
+#options-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: content-box;
+    justify-content: space-around;
+    /* align-items:flex-start; */
+    width: 100%;
+    padding: 2rem;
+}
+
+#options-title {
+    align-self: center;
+    height: 100%;
+}
+
+.button-container {
+    width: 7rem;
+    height: 4rem;
+    margin: .5rem;
+}
+
+h5 {
+    color: var(--OPTIONS_CHECKBOX_HEADER);
+    text-align: center;
+}
+
+.switch {
+    position: relative;
+    left: 1.5rem;
+    display: inline-block;
+    width: 4rem;
+    height: 2.12rem;
+}
+
+.options-checkbox {
+    display: block;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.options-checkbox:checked + .slider {
+    background-color: var(--OPTIONS_CHECKBOX_ACTIVE);
+}
+
+.options-checkbox:checked + .slider:before {
+    -webkit-transform: translateX(1.85rem);
+    -ms-transform: translateX(1.85rem);
+    transform: translateX(1.85rem);
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: var(--OPTIONS_CHECKBOX_INACTIVE);
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--OPTIONS_CHECKBOX_SLIDER);
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}

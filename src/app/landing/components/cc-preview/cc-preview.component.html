@@ -1,0 +1,17 @@
+<div class="card" id="container">
+    <h3 class="card-title">Download</h3>
+    <div id="content">
+        <video width="320" height="180" controls *ngIf="video; else audio">
+            <source src="../../assets/a.mp4" type="video/mp4">
+            Your browser does not support HTML native playback of video.
+        </video>
+        <p>Content will expire after {{ minutes }} minutes.</p>
+        <p>Click <a href="#">here</a> to download.</p>
+    </div>
+    <ng-template #audio>
+        <audio controls>
+            <source src="../../assets/a.ogg" type="audio/ogg">
+            Your browser does not support HTML native playback of audio.
+        </audio>
+    </ng-template>
+</div>

@@ -1,0 +1,17 @@
+@import url('_font.css');
+
+:root {
+    --FF: 'Montserrat', sans-serif;
+    --FF_CONTROL_HEAD: 'Quicksand', sans-serif;
+
+    /* || Colours */
+    --CARD_BG: whitesmoke;
+    --CARD_BORDER_RADIUS: 5px;
+    --URL_CARD_INPUT_BORDER: #3b3d44;
+    --OPTIONS_TITLE_BG: #e07a5f;
+    --CARD_TITLE: white;
+    --OPTIONS_CHECKBOX_ACTIVE: #2196F3;
+    --OPTIONS_CHECKBOX_INACTIVE: #dbdada;
+    --OPTIONS_CHECKBOX_SLIDER: white;
+    --OPTIONS_CHECKBOX_HEADER: #3b3d44;
+}
