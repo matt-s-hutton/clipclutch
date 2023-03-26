@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./cc-preview.component.css']
 })
 export class CcPreviewComponent {
-  public video = false;
+  public video = true;
   public minutes = 25;
 }
