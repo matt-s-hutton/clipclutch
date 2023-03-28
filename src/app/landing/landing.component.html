@@ -1,15 +1,29 @@
 <div id="controls-section">
-    <form id="controls-card">
+    <form [formGroup]="videoForm" id="controls-card">
         <span class="card controls-section" id="url-card">
             <h3 class="card-title">Media</h3>
             <div>
                 <label for="video-url">
-                    <input placeholder="{{ urlPlaceholder }}" type="text" name="video-url" id="video-url"><button>⮕</button>
+                    <input
+                        placeholder="{{ urlPlaceholder }}"
+                        type="text"
+                        name="video-url"
+                        id="video-url"
+                        formControlName="{{ fgUrlKey }}">
+                    <button
+                    [ngClass]="{'button-disabled': urlHasNotBeenEntered}"
+                    (click)="submitForm()">
+                    ⮕
+                    <span [ngClass]="{'required-tooltip': urlHasNotBeenEntered}">
+                        This field is required.
+                    </span>
+                    </button>
                 </label>
+                <p>{{ urlError }}</p>
             </div>
         </span>
         <div class="controls-section">
-            <cc-options></cc-options>
+            <cc-options [formGroup]="videoForm" [optionsButtons]="optionsButtons"></cc-options>
         </div>
         <div class="controls-section">
             <cc-preview></cc-preview>

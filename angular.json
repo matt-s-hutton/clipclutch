@@ -32,7 +32,10 @@
             "styles": [
               "src/styles/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "url-http"
+            ]
           },
           "configurations": {
             "production": {

@@ -1,10 +1,10 @@
 <div class="card" id="options-card">
     <h3>Options</h3>
-    <div id="options-buttons">
+    <div [formGroup]="videoForm"  id="options-buttons">
         <div class="button-container" *ngFor="let button of optionsButtons">
             <h5>{{ button.heading }}</h5>
             <label class="switch">
-                <input class="options-checkbox" type="checkbox" name="{{ button.inputName }}" id="{{ button.inputId }}">
+                <input formControlName="{{ button.inputId }}" class="options-checkbox" type="checkbox" name="{{ button.inputName }}" id="{{ button.inputId }}">
                 <span class="slider"></span>
             </label>
         </div>

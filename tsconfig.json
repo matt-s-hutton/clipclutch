@@ -3,6 +3,7 @@
   "compileOnSave": false,
   "include": [
     ".eslintrc.js",
+    "polyfills.js",
     "src/**/*.ts"
   ],
   "exclude": [
