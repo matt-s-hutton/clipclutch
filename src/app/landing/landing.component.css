@@ -41,6 +41,10 @@
     outline: none;
 }
 
+#url-card input.placehold-error-text::placeholder {
+    color: #e5383b;
+}
+
 #url-card button {
     position: relative;
     right: 20px;
@@ -55,6 +59,10 @@
     color: #a8aaad;
 }
 
-#url-card button.required-tooltip {
-    
+#url-card button.button-disabled {
+    color: #525457a4;
+}
+
+#url-card button.button-disabled:hover {
+    cursor: default;
 }

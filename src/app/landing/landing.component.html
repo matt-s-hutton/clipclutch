@@ -6,6 +6,8 @@
                 <label for="video-url">
                     <input
                         placeholder="{{ urlPlaceholder }}"
+                        [ngClass]="{'placehold-error-text': urlPlaceholderErrorDisplayed}"
+                        (keyup.enter)="submitForm()"
                         type="text"
                         name="video-url"
                         id="video-url"
@@ -14,9 +16,6 @@
                     [ngClass]="{'button-disabled': urlHasNotBeenEntered}"
                     (click)="submitForm()">
                     ⮕
-                    <span [ngClass]="{'required-tooltip': urlHasNotBeenEntered}">
-                        This field is required.
-                    </span>
                     </button>
                 </label>
                 <p>{{ urlError }}</p>

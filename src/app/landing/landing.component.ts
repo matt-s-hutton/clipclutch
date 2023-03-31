@@ -19,6 +19,7 @@ export class LandingComponent implements OnInit {
 
   public urlError = '';
   public urlPlaceholder = 'Enter the link to a video here';
+  public urlPlaceholderErrorDisplayed = false;
   public optionsButtons: ControlOptions[] = [];
 
   public downloadSrc = '';
@@ -49,6 +50,8 @@ export class LandingComponent implements OnInit {
 
   public submitForm(): void {
     if (this.urlHasNotBeenEntered) {
+      this.urlPlaceholder = "This field is required!";
+      this.urlPlaceholderErrorDisplayed = true;
       return;
     }
     const downloadParameters: DownloadParameters = {
