@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
-import { CcOptionsComponent } from './landing/components/cc-options/cc-options.component';
-import { CcPreviewComponent } from './landing/components/cc-preview/cc-preview.component';
+import { CcOptionsComponent } from './cc-options/cc-options.component';
+import { CcPreviewComponent } from './cc-preview/cc-preview.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +20,7 @@ import { CcPreviewComponent } from './landing/components/cc-preview/cc-preview.c
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule
   ],
   providers: [],

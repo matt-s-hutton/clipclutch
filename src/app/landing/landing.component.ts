@@ -4,9 +4,10 @@ import { OPTIONS_BUTTONS } from '../shared/const/control-options.const';
 import { ControlOptions } from '../shared/models/control-options.type';
 import { validUrl } from '../shared/validators/valid-url';
 import { DownloadParameters } from '../shared/models/download-parameters.type';
-import { DownloadService } from './services/download/download.service';
+import { DownloadService } from '../services/download/download.service';
 import { DownloadResponse } from '../shared/models/download-response.type';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FG_URL_KEY } from '../shared/const/video-form-url-key.const';
 
 @Component({
   selector: 'cc-landing',
@@ -15,7 +16,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class LandingComponent implements OnInit {
   public videoForm : FormGroup = new FormGroup({});
-  public fgUrlKey = 'url';
+  public fgUrlKey = FG_URL_KEY;
 
   public urlError = '';
   public urlPlaceholder = 'Enter the link to a video here';
@@ -26,7 +27,7 @@ export class LandingComponent implements OnInit {
   public downloadErrorMessage = '';
   public urlHasNotBeenEntered = true;
 
-  constructor(private readonly fb: FormBuilder, private downloadService: DownloadService) {
+  constructor(private fb: FormBuilder, private downloadService: DownloadService) {
     this.videoForm = this.fb.group({
       [this.fgUrlKey]: new FormControl('', [Validators.required, validUrl()]),
     });

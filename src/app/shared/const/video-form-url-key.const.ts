@@ -1,0 +1,1 @@
+export const FG_URL_KEY = 'url';
