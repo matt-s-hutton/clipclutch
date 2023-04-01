@@ -14,7 +14,7 @@ module.exports = {
     rules: {
       semi: [1, 'always'],
       'no-extra-semi': 1,
-      'no-console': 2
+      'no-console': 2,
+      'no-trailing-spaces': 2
     }
   };
-  

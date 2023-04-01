@@ -38,13 +38,14 @@ export class LandingComponent implements OnInit {
     for (const option of this.optionsButtons) {
       this.videoForm.addControl(option.inputId, new FormControl(false));
     }
-    this.videoForm.valueChanges.subscribe( () => { 
+    this.videoForm.valueChanges.subscribe( () => {
       const errors: ValidationErrors | null | undefined = this.videoForm.get(this.fgUrlKey)?.errors;
         if (errors) {
           this.urlError = errors['urlErrorMessage'];
-          this.urlHasNotBeenEntered = !!errors['required'];
+          this.urlHasNotBeenEntered = !!errors['required'] || !!errors['urlError'];
         } else {
           this.urlError = '';
+          this.urlHasNotBeenEntered = false;
         }
     });
   }
@@ -84,5 +85,5 @@ export class LandingComponent implements OnInit {
     }
     return options;
   }
-  
+
 }
