@@ -4,4 +4,4 @@ export const SUPPORTED_SITES = [
     'tiktok',
     'twitter',
     'vimeo'
-]
+];

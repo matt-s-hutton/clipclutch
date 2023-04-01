@@ -9,7 +9,7 @@ export function validUrl(): ValidatorFn {
             urlError: false,
             urlErrorMessage: ''
         };
-    
+
         if (control.value) {
             isUrlValid(control.value, error);
         }
@@ -25,7 +25,6 @@ function isUrlValid(url: string, error: UrlValidationError): void {
         return;
     }
 
-    
     const parts: string[] = new URL(url).hostname.split('.');
     if ( !SUPPORTED_SITES.some( site => parts[parts.length -2] == site)) {
         error.urlError = true;

@@ -16,7 +16,7 @@ describe('CcOptionsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ 
+      declarations: [
         LandingComponent,
         CcOptionsComponent,
         CcPreviewComponent

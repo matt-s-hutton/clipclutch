@@ -16,5 +16,5 @@ export class VideoFormStub {
 
     public getVideoFormStub(): FormGroup {
         return this.videoFormStub;
-    }    
+    }
 }
