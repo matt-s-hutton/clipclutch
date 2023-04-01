@@ -52,7 +52,7 @@ export class LandingComponent implements OnInit {
 
   public submitForm(): void {
     if (this.urlHasNotBeenEntered) {
-      this.urlPlaceholder = "This field is required!";
+      this.urlPlaceholder = "You need to enter a link in this field!";
       this.urlPlaceholderErrorDisplayed = true;
       return;
     }
@@ -61,7 +61,7 @@ export class LandingComponent implements OnInit {
       options: this.getOptions()
     };
     this.downloadService.getDownloadLink(downloadParameters).subscribe({
-      next: (response: DownloadResponse) => this.submitFormSuccess(response.path),
+      next: (response: DownloadResponse) => this.submitFormSuccess(response.message.path),
       error: (e: HttpErrorResponse) => this.submitFormError(e)
     });
   }

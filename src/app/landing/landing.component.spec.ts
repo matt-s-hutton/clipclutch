@@ -26,7 +26,12 @@ describe('LandingComponent', () => {
       statusText: 'I\'m a teapot'
     }
   );
-  const downloadLinkSuccessResponse: DownloadResponse = { path: 'path' };
+  const downloadLinkSuccessResponse: DownloadResponse = {
+    status: 200,
+    message: {
+      path: 'path'
+    }
+  };
   const downloadLinkSuccessResponse$: Observable<DownloadResponse> = of(downloadLinkSuccessResponse);
 
   beforeEach(async () => {
@@ -83,7 +88,7 @@ describe('LandingComponent', () => {
 
     // THEN
     expect(getDownloadLinkMock.getDownloadLink).toHaveBeenCalledWith(downloadParameters);
-    expect(component.downloadSrc).toEqual(downloadLinkSuccessResponse.path);
+    expect(component.downloadSrc).toEqual(downloadLinkSuccessResponse.message.path);
   });
 
   it('should not submit the form if an invalid URL has been entered', () => {
