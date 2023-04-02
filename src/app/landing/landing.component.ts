@@ -42,13 +42,12 @@ export class LandingComponent implements OnInit {
     });
   }
 
-  // TODO: Setting the default value on option buttons broken
   ngOnInit(): void {
-    this.optionsButtons = this.optionButtonService.getOptionsButtons().filter( button => button.present);
+    this.optionsButtons = this.optionButtonService.getOptionsButtons();
     for (const option of this.optionsButtons) {
-      this.videoForm.addControl(option.id, new FormControl(option.default ?? false));
+      this.videoForm.addControl(option.id, new FormControl(option.default));
     }
-    // this.setSubscriptions();
+    this.setSubscriptions();
   }
 
   private setSubscriptions(): void {
@@ -134,10 +133,10 @@ export class LandingComponent implements OnInit {
       embedSubs: this.videoForm.get(this.optionButtonService.getEmbedSubsId())?.value,
       getThumbnail: this.videoForm.get(this.optionButtonService.getThumbnailId())?.value
     };
-    const supportedFormats = VIDEO_FORMAT.concat(AUDIO_FORMAT);
+    const formatIds = this.optionButtonService.getFormatOptionsIds();
     for (const controlName in this.videoForm.controls) {
       const control = this.videoForm.get(controlName);
-      if (supportedFormats.includes(controlName) && control?.value) {
+      if (formatIds.includes(controlName) && control?.value) {
         options.convertFormat = controlName;
       }
     }

@@ -18,13 +18,11 @@ export class OptionButtonService {
           heading: 'Embed Subtitles',
           description: 'Subtitles will only be embedded if they are available for the video',
           id: this.embedSubsId,
-          present: true
       },
       {
           heading: 'Get thumbnail',
           description: 'A separate link to the thumbnail will be provided',
           id: this.thumbnailId,
-          present: true
       }
   ];
 
@@ -35,8 +33,7 @@ export class OptionButtonService {
           {
               heading: audioFormat,
               id: audioFormat.toLowerCase(),
-              present: true,
-              default: audioFormat === this.defaultFormat
+              default: audioFormat.toLowerCase() === this.defaultFormat
           }
       );
     }
@@ -45,8 +42,7 @@ export class OptionButtonService {
           {
               heading: videoFormat,
               id: videoFormat.toLowerCase(),
-              present: true,
-              default: videoFormat === this.defaultFormat
+              default: videoFormat.toLowerCase() === this.defaultFormat
           }
       );
     }
@@ -58,6 +54,14 @@ export class OptionButtonService {
 
   public getFormatOptionsButtons(): ControlOptions[] {
     return this.filterOptionsByHeading(VIDEO_FORMAT.concat(AUDIO_FORMAT));
+  }
+
+  public getFormatOptionsIds(): string[] {
+    const optionIds: string[] = [];
+    for (const option of this.getFormatOptionsButtons()) {
+      optionIds.push(option.id);
+    }
+    return optionIds;
   }
 
   public getEmbedSubsId(): string {
