@@ -4,7 +4,7 @@
         <div class="button-container" *ngFor="let button of optionsButtons">
             <h5>{{ button.heading }}</h5>
             <label class="switch">
-                <input formControlName="{{ button.inputId }}" class="options-checkbox" type="checkbox" name="{{ button.inputName }}" id="{{ button.inputId }}">
+                <input formControlName="{{ button.id }}" class="options-checkbox" type="checkbox" id="{{ button.id }}">
                 <span class="slider"></span>
             </label>
         </div>

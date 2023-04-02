@@ -26,9 +26,15 @@ function isUrlValid(url: string, error: UrlValidationError): void {
     }
 
     const parts: string[] = new URL(url).hostname.split('.');
-    if ( !SUPPORTED_SITES.some( site => parts[parts.length -2] == site)) {
+    if (!SUPPORTED_SITES.some( site => parts[parts.length -2] == site)) {
         error.urlError = true;
         error.urlErrorMessage = 'The website given in the link is not supported';
+        return;
+    }
+
+    if (url.includes('playlist')) {
+        error.urlError = true;
+        error.urlErrorMessage = 'Playlists are not supported';
         return;
     }
 }

@@ -1,6 +1,6 @@
 export type ControlOptions = {
     heading: string;
-    inputName: string;
-    inputId: string
-    present?: boolean;
+    id: string
+    description?: string;
+    default?: boolean;
 }

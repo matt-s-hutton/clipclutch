@@ -9,14 +9,15 @@ import { VideoFormStub } from '../shared/test/stubs/video-form-stub';
 import { FG_URL_KEY } from '../shared/const/video-form-url-key.const';
 import { DownloadService } from '../services/download/download.service';
 import { Observable, of, throwError } from 'rxjs';
-import { DownloadParameters } from '../shared/models/download-parameters.type';
-import { OPTIONS_BUTTONS } from '../shared/const/control-options.const';
+import { DownloadOptions, DownloadParameters } from '../shared/models/download-parameters.type';
 import { DownloadResponse } from '../shared/models/download-response.type';
 import { HttpErrorResponse } from '@angular/common/http';
+import { OptionButtonService } from '../services/option-button/option-button.service';
 
 describe('LandingComponent', () => {
   let component: LandingComponent;
   let fixture: ComponentFixture<LandingComponent>;
+  let optionsButtonService: OptionButtonService;
   const videoFormStubber: VideoFormStub = new VideoFormStub();
   let getDownloadLinkMock: jasmine.SpyObj<DownloadService>;
   const downloadLinkErrorResponse: HttpErrorResponse = new HttpErrorResponse(
@@ -60,6 +61,7 @@ describe('LandingComponent', () => {
     fixture = TestBed.createComponent(LandingComponent);
     component = fixture.componentInstance;
     component.videoForm = videoFormStubber.getVideoFormStub();
+    optionsButtonService = new OptionButtonService();
     fixture.detectChanges();
   });
 
@@ -72,15 +74,20 @@ describe('LandingComponent', () => {
     // A valid URL is entered
     component.urlHasNotBeenEntered = false;
     component.videoForm.get(FG_URL_KEY)?.patchValue('https://www.youtube.com/watch?v=jNQXAC9IVRw');
+    component.videoForm.get(optionsButtonService.getEmbedSubsId())?.patchValue(false);
+    component.videoForm.get(optionsButtonService.getThumbnailId())?.patchValue(false);
 
     // One of the options has been chosen
-    const enabledOption = OPTIONS_BUTTONS[0];
-    component.videoForm.get(enabledOption.inputId)?.patchValue(true);
+    const enabledOption = component.optionsButtons[0];
+    component.videoForm.get(enabledOption.id)?.patchValue(true);
+    const downloadOptions: DownloadOptions = {
+      convertFormat: enabledOption.id,
+      embedSubs: false,
+      getThumbnail: false
+    };
     const downloadParameters: DownloadParameters = {
       url: component.videoForm.get(FG_URL_KEY)?.value,
-      options: [
-        enabledOption.inputId
-      ]
+      options: downloadOptions
     };
 
     // WHEN
