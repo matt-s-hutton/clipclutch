@@ -19,7 +19,6 @@
     flex-wrap: wrap;
     box-sizing: content-box;
     justify-content: space-around;
-    /* align-items:flex-start; */
     width: 100%;
     padding: 2rem;
 }
@@ -38,6 +37,31 @@
 h5 {
     color: var(--OPTIONS_CHECKBOX_HEADER);
     text-align: center;
+    margin-bottom: .5rem;
+    cursor: default;
+}
+
+.tooltip {
+    position: relative;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
+
+.tooltip > .tooltiptext {
+    position: absolute;
+    bottom: 1rem;
+    left: 6.7rem;
+    visibility: hidden;
+    width: 8rem;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: .2rem .1rem;
+}
+
+.tooltip:hover > .tooltiptext {
+    visibility: visible;
 }
 
 .switch {

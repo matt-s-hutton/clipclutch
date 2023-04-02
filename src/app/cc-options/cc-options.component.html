@@ -2,7 +2,10 @@
     <h3>Options</h3>
     <div [formGroup]="videoForm"  id="options-buttons">
         <div class="button-container" *ngFor="let button of optionsButtons">
-            <h5>{{ button.heading }}</h5>
+            <h5 class="no-select" [ngClass]="{'tooltip': !!button.description}">
+                {{ button.heading }}
+                <div class="tooltiptext">{{ button.description }}</div>
+            </h5>
             <label class="switch">
                 <input formControlName="{{ button.id }}" class="options-checkbox" type="checkbox" id="{{ button.id }}">
                 <span class="slider"></span>

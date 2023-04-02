@@ -21,3 +21,9 @@
     border-radius: var(--CARD_BORDER_RADIUS) var(--CARD_BORDER_RADIUS) 0 0;
     padding: .5rem 0;
 }
+
+.no-select {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
