@@ -8,8 +8,6 @@ import { DownloadResponse } from '../shared/models/download-response.type';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FG_URL_KEY } from '../shared/const/video-form-url-key.const';
 import { OptionButtonService } from '../services/option-button/option-button.service';
-import { VIDEO_FORMAT } from '../shared/const/supported_video_formats.const';
-import { AUDIO_FORMAT } from '../shared/const/supported_audio_formats.const';
 import { Subscription } from 'rxjs';
 
 @Component({
