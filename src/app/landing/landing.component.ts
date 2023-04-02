@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { OPTIONS_BUTTONS } from '../shared/const/control-options.const';
 import { ControlOptions } from '../shared/models/control-options.type';
 import { validUrl } from '../shared/validators/valid-url';
-import { DownloadParameters } from '../shared/models/download-parameters.type';
+import { DownloadOptions, DownloadParameters } from '../shared/models/download-parameters.type';
 import { DownloadService } from '../services/download/download.service';
 import { DownloadResponse } from '../shared/models/download-response.type';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FG_URL_KEY } from '../shared/const/video-form-url-key.const';
+import { OptionButtonService } from '../services/option-button/option-button.service';
+import { VIDEO_FORMAT } from '../shared/const/supported_video_formats.const';
+import { AUDIO_FORMAT } from '../shared/const/supported_audio_formats.const';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'cc-landing',
@@ -27,18 +30,61 @@ export class LandingComponent implements OnInit {
   public downloadErrorMessage = '';
   public urlHasNotBeenEntered = true;
 
-  constructor(private fb: FormBuilder, private downloadService: DownloadService) {
+  private subscriptions: (Subscription | undefined)[] = [];
+
+  constructor(
+    private fb: FormBuilder,
+    private downloadService: DownloadService,
+    private optionButtonService: OptionButtonService
+  ) {
     this.videoForm = this.fb.group({
       [this.fgUrlKey]: new FormControl('', [Validators.required, validUrl()]),
     });
   }
 
+  // TODO: Setting the default value on option buttons broken
   ngOnInit(): void {
-    this.optionsButtons = OPTIONS_BUTTONS.filter( button => button.present);
+    this.optionsButtons = this.optionButtonService.getOptionsButtons().filter( button => button.present);
     for (const option of this.optionsButtons) {
-      this.videoForm.addControl(option.inputId, new FormControl(false));
+      this.videoForm.addControl(option.id, new FormControl(option.default ?? false));
     }
-    this.videoForm.valueChanges.subscribe( () => {
+    // this.setSubscriptions();
+  }
+
+  private setSubscriptions(): void {
+    this.subscriptions.push(this.listenForErrors());
+    const formatOptions: ControlOptions[] = this.optionButtonService.getFormatOptionsButtons();
+    for (const option of formatOptions) {
+      this.subscriptions.push(this.setOppositeFormatDisabled(option.id, formatOptions));
+    }
+  }
+
+  /**
+   * Subscribes to a FormControl's value changes. If that FormControl is updated with a true value
+   * then set the opposite FormControl to disabled. For use with mutually exclusive option buttons e.g.
+   * can't convert a video to both WebM and MP3.
+   * @param formControlName
+   * @param allFormatButtons
+   * @returns Subscription | undefined
+   */
+  private setOppositeFormatDisabled(formControlName: string, allFormatButtons: ControlOptions[]): Subscription | undefined {
+    return this.videoForm.get(formControlName)?.valueChanges.subscribe( (value: boolean) => {
+      if (value) {
+        for (const oppositeName of allFormatButtons) {
+          if (oppositeName.id !== formControlName) {
+            this.videoForm.get(oppositeName.id)?.patchValue(false);
+          }
+        }
+      }
+    });
+  }
+
+  /**
+   * Listen for all value changes to the video form in order to display errors if necessary.
+   * @returns Subscription | undefined
+   */
+  private listenForErrors(): Subscription | undefined {
+    return this.videoForm.valueChanges.subscribe( () => {
       const errors: ValidationErrors | null | undefined = this.videoForm.get(this.fgUrlKey)?.errors;
         if (errors) {
           this.urlError = errors['urlErrorMessage'];
@@ -50,6 +96,10 @@ export class LandingComponent implements OnInit {
     });
   }
 
+  /**
+   * Submit the form to the API
+   * @returns void
+   */
   public submitForm(): void {
     if (this.urlHasNotBeenEntered) {
       this.urlPlaceholder = "You need to enter a link in this field!";
@@ -74,13 +124,21 @@ export class LandingComponent implements OnInit {
     this.downloadErrorMessage = error.message;
   }
 
-  private getOptions(): string[] {
-    const options: string[] = [];
+  /**
+   * Create a DownloadOptions object which can be sent to the API.
+   * @returns DownloadOptions
+   */
+  private getOptions(): DownloadOptions {
+    const options: DownloadOptions = {
+      convertFormat: '',
+      embedSubs: this.videoForm.get(this.optionButtonService.getEmbedSubsId())?.value,
+      getThumbnail: this.videoForm.get(this.optionButtonService.getThumbnailId())?.value
+    };
+    const supportedFormats = VIDEO_FORMAT.concat(AUDIO_FORMAT);
     for (const controlName in this.videoForm.controls) {
       const control = this.videoForm.get(controlName);
-      const isOption = this.optionsButtons.some( (option) => option.inputId === controlName);
-      if (isOption && control?.value) {
-        options.push(controlName);
+      if (supportedFormats.includes(controlName) && control?.value) {
+        options.convertFormat = controlName;
       }
     }
     return options;

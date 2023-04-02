@@ -9,8 +9,7 @@ import { VideoFormStub } from '../shared/test/stubs/video-form-stub';
 import { FG_URL_KEY } from '../shared/const/video-form-url-key.const';
 import { DownloadService } from '../services/download/download.service';
 import { Observable, of, throwError } from 'rxjs';
-import { DownloadParameters } from '../shared/models/download-parameters.type';
-import { OPTIONS_BUTTONS } from '../shared/const/control-options.const';
+import { DownloadOptions, DownloadParameters } from '../shared/models/download-parameters.type';
 import { DownloadResponse } from '../shared/models/download-response.type';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -74,13 +73,16 @@ describe('LandingComponent', () => {
     component.videoForm.get(FG_URL_KEY)?.patchValue('https://www.youtube.com/watch?v=jNQXAC9IVRw');
 
     // One of the options has been chosen
-    const enabledOption = OPTIONS_BUTTONS[0];
-    component.videoForm.get(enabledOption.inputId)?.patchValue(true);
+    const enabledOption = component.optionsButtons[0];
+    component.videoForm.get(enabledOption.id)?.patchValue(true);
+    const downloadOptions: DownloadOptions = {
+      convertFormat: enabledOption.id,
+      embedSubs: false,
+      getThumbnail: false
+    };
     const downloadParameters: DownloadParameters = {
       url: component.videoForm.get(FG_URL_KEY)?.value,
-      options: [
-        enabledOption.inputId
-      ]
+      options: downloadOptions
     };
 
     // WHEN
