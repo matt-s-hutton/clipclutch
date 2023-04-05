@@ -5,6 +5,8 @@
 **/*.ogg
 **/*.webm
 
+*.code-workspace
+
 # Compiled output
 /dist
 /tmp

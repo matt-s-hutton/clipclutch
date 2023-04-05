@@ -12,6 +12,6 @@ export class DownloadService {
   constructor(private http: HttpClient) { }
 
   getDownloadLink(downloadParameters: DownloadParameters): Observable<DownloadResponse> {
-    return this.http.post<DownloadResponse>('http://localhost:8081/api/requestdownload', downloadParameters);
+    return this.http.post<DownloadResponse>('https://localhost/api/requestdownload', downloadParameters);
   }
 }
