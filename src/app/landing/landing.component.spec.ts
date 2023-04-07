@@ -30,7 +30,9 @@ describe('LandingComponent', () => {
   const downloadLinkSuccessResponse: DownloadResponse = {
     status: 200,
     message: {
-      path: 'path'
+      path: 'path',
+      format: 'mp4',
+      media: 'video'
     }
   };
   const downloadLinkSuccessResponse$: Observable<DownloadResponse> = of(downloadLinkSuccessResponse);
@@ -62,6 +64,8 @@ describe('LandingComponent', () => {
     component = fixture.componentInstance;
     component.videoForm = videoFormStubber.getVideoFormStub();
     optionsButtonService = new OptionButtonService();
+    component.dl = null;
+    component.downloadErrorMessage = '';
     fixture.detectChanges();
   });
 
@@ -95,7 +99,7 @@ describe('LandingComponent', () => {
 
     // THEN
     expect(getDownloadLinkMock.getDownloadLink).toHaveBeenCalledWith(downloadParameters);
-    expect(component.downloadSrc).toEqual(downloadLinkSuccessResponse.message.path);
+    expect(component.dl).toEqual(downloadLinkSuccessResponse.message);
   });
 
   it('should not submit the form if an invalid URL has been entered', () => {
@@ -108,7 +112,7 @@ describe('LandingComponent', () => {
 
     // THEN
     expect(getDownloadLinkMock.getDownloadLink).not.toHaveBeenCalled();
-    expect(component.downloadSrc).toEqual('');
+    expect(component.dl).toEqual(null);
   });
 
   it('should update downloadErrorMessage if the API returns an error', () => {
@@ -121,6 +125,39 @@ describe('LandingComponent', () => {
     component.submitForm();
 
     // THEN
+    expect(component.downloadErrorMessage).toEqual(downloadLinkErrorResponse.message);
+  });
+
+  it('should not show the loader after the API has completed a download ', () => {
+    // GIVEN
+    component.urlHasNotBeenEntered = false;
+    component.showLoader = true;
+    component.videoForm.get(FG_URL_KEY)?.patchValue('https://www.youtube.com/watch?v=jNQXAC9IVRw');
+    component.videoForm.get(optionsButtonService.getEmbedSubsId())?.patchValue(false);
+    component.videoForm.get(optionsButtonService.getThumbnailId())?.patchValue(false);
+
+    // WHEN
+    component.submitForm();
+
+    // THEN
+    expect(component.showLoader).toBeFalse();
+    expect(component.dl).toEqual(downloadLinkSuccessResponse.message);
+  });
+
+  it('should not show the loader after the API has returned an error', () => {
+    // GIVEN
+    component.urlHasNotBeenEntered = false;
+    component.showLoader = true;
+    getDownloadLinkMock.getDownloadLink.and.returnValue(throwError(() => downloadLinkErrorResponse))
+    component.videoForm.get(FG_URL_KEY)?.patchValue('https://www.youtube.com/watch?v=jNQXAC9IVRw');
+    component.videoForm.get(optionsButtonService.getEmbedSubsId())?.patchValue(false);
+    component.videoForm.get(optionsButtonService.getThumbnailId())?.patchValue(false);
+
+    // WHEN
+    component.submitForm();
+
+    // THEN
+    expect(component.showLoader).toBeFalse();
     expect(component.downloadErrorMessage).toEqual(downloadLinkErrorResponse.message);
   });
 });
