@@ -4,7 +4,7 @@ import { ControlOptions } from '../shared/models/control-options.type';
 import { validUrl } from '../shared/validators/valid-url';
 import { DownloadOptions, DownloadParameters } from '../shared/models/download-parameters.type';
 import { DownloadService } from '../services/download/download.service';
-import { DownloadResponse } from '../shared/models/download-response.type';
+import { DownloadDetails, DownloadResponse } from '../shared/models/download-response.type';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FG_URL_KEY } from '../shared/const/video-form-url-key.const';
 import { OptionButtonService } from '../services/option-button/option-button.service';
@@ -20,11 +20,12 @@ export class LandingComponent implements OnInit {
   public fgUrlKey = FG_URL_KEY;
 
   public urlError = '';
-  public urlPlaceholder = 'Enter the link to a video here';
+  public urlPlaceholder = 'Enter your URL';
   public urlPlaceholderErrorDisplayed = false;
   public optionsButtons: ControlOptions[] = [];
+  public showLoader = false;
 
-  public downloadSrc = '';
+  public dl: DownloadDetails | null = null;
   public downloadErrorMessage = '';
   public urlHasNotBeenEntered = true;
 
@@ -99,25 +100,28 @@ export class LandingComponent implements OnInit {
    */
   public submitForm(): void {
     if (this.urlHasNotBeenEntered) {
-      this.urlPlaceholder = "You need to enter a link in this field!";
+      this.urlPlaceholder = "URL required";
       this.urlPlaceholderErrorDisplayed = true;
       return;
     }
+    this.showLoader = true;
     const downloadParameters: DownloadParameters = {
       url: this.videoForm.get(this.fgUrlKey)?.value,
       options: this.getOptions()
     };
     this.downloadService.getDownloadLink(downloadParameters).subscribe({
-      next: (response: DownloadResponse) => this.submitFormSuccess(response.message.path),
+      next: (response: DownloadResponse) => this.submitFormSuccess(response.message),
       error: (e: HttpErrorResponse) => this.submitFormError(e)
     });
   }
 
-  private submitFormSuccess(downloadpath: string): void {
-    this.downloadSrc = downloadpath;
+  private submitFormSuccess(downloadpath: DownloadDetails): void {
+    this.showLoader = false;
+    this.dl = downloadpath;
   }
 
   private submitFormError(error: HttpErrorResponse): void {
+    this.showLoader = false;
     this.downloadErrorMessage = error.message;
   }
 

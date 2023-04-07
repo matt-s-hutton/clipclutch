@@ -1,8 +1,10 @@
 export type DownloadResponse = {
     status: number,
-    message: DownloadPath
+    message: DownloadDetails
 }
 
-type DownloadPath = {
-    path: string
+export type DownloadDetails = {
+    path: string,
+    format: string,
+    media: string
 }

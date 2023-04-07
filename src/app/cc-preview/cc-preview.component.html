@@ -1,17 +1,20 @@
-<div class="card" id="container">
+<div *ngIf="show" class="card" id="container">
     <h3 class="card-title">Download</h3>
     <div id="content">
-        <video width="320" height="180" controls *ngIf="video; else audio">
-            <source src="../../assets/a.mp4" type="video/mp4">
-            Your browser does not support HTML native playback of video.
-        </video>
-        <p>Content will expire after {{ minutes }} minutes.</p>
-        <p>Click <a href="#">here</a> to download.</p>
+        <cc-loading-animation *ngIf="loading; else loaded"></cc-loading-animation>
     </div>
-    <ng-template #audio>
-        <audio controls>
-            <source src="../../assets/a.ogg" type="audio/ogg">
+    <ng-template #loaded>
+        <audio controls *ngIf="dl?.media === 'audio'; else video">
+            <source src="{{ dl?.path }}" type="audio/{{ dl?.format }}">
             Your browser does not support HTML native playback of audio.
         </audio>
+        <p>Content will expire after 25 minutes.</p>
+        <p>Click <a href="{{baseUrl}}{{dl?.path}}" download>here</a> to download.</p>
+    </ng-template>
+    <ng-template #video>
+        <video width="320" height="180" controls>
+            <source src="{{ dl?.path }}" type="video/{{ dl?.format }}">
+            Your browser does not support HTML native playback of video.
+        </video>
     </ng-template>
 </div>

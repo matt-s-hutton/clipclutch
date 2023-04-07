@@ -11,21 +11,25 @@
                         type="text"
                         name="video-url"
                         id="video-url"
-                        formControlName="{{ fgUrlKey }}">
-                    <button
-                    [ngClass]="{'button-disabled': urlHasNotBeenEntered}"
-                    (click)="submitForm()">
-                    ⮕
+                        formControlName="{{ fgUrlKey }}"
+                        autocomplete="off">
+                    <button (click)="submitForm()" [ngClass]="{'button-disabled': urlHasNotBeenEntered}">
+                        <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24">
+                            <path d="m13.025 1-2.847 2.828 6.176 6.176H0v3.992h16.354l-6.176 6.176L13.025 23 24 12z"/>
+                        </svg>
                     </button>
                 </label>
                 <p>{{ urlError }}</p>
             </div>
         </span>
         <div class="controls-section">
-            <cc-options [formGroup]="videoForm" [optionsButtons]="optionsButtons"></cc-options>
+            <cc-preview [show]="showLoader || !!dl?.path" [loading]="showLoader" [dl]="dl"></cc-preview>
         </div>
         <div class="controls-section">
-            <cc-preview></cc-preview>
+            <cc-options [formGroup]="videoForm" [optionsButtons]="optionsButtons"></cc-options>
         </div>
     </form>
 </div>
