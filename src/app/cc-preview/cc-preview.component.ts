@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { DownloadDetails } from '../shared/models/download-response.type';
-import { BASE_URL } from '../shared/const/base_url.const';
+import { ConfigService } from '../services/config/config.service';
+import { Config } from '../shared/models/config.type';
 
 @Component({
   selector: 'cc-preview',
@@ -12,5 +13,11 @@ export class CcPreviewComponent {
   @Input() loading = false;
   @Input() dl: DownloadDetails | null = null;
 
-  public baseUrl = BASE_URL;
+  public config: Config;
+  public baseUrl: string;
+
+  constructor(private configService: ConfigService) {
+    this.config = this.configService.config;
+    this.baseUrl = this.config.baseUrl;
+  }
 }

@@ -22,3 +22,17 @@ video {
 p {
     text-align: center;
 }
+
+#anchor-container {
+    display: flex;
+    justify-content: center;
+}
+
+.download-anchor {
+    color: white;
+    text-decoration: none;
+    margin: .5rem;
+    padding: .5rem;
+    background-color: #53aaf1;
+    border-radius: 5px;
+}

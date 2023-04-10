@@ -32,7 +32,8 @@ describe('LandingComponent', () => {
     message: {
       path: 'path',
       format: 'mp4',
-      media: 'video'
+      media: 'video',
+      thumbnail: null
     }
   };
   const downloadLinkSuccessResponse$: Observable<DownloadResponse> = of(downloadLinkSuccessResponse);
@@ -148,7 +149,7 @@ describe('LandingComponent', () => {
     // GIVEN
     component.urlHasNotBeenEntered = false;
     component.showLoader = true;
-    getDownloadLinkMock.getDownloadLink.and.returnValue(throwError(() => downloadLinkErrorResponse))
+    getDownloadLinkMock.getDownloadLink.and.returnValue(throwError(() => downloadLinkErrorResponse));
     component.videoForm.get(FG_URL_KEY)?.patchValue('https://www.youtube.com/watch?v=jNQXAC9IVRw');
     component.videoForm.get(optionsButtonService.getEmbedSubsId())?.patchValue(false);
     component.videoForm.get(optionsButtonService.getThumbnailId())?.patchValue(false);

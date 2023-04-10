@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AUDIO_FORMAT } from 'src/app/shared/const/supported_audio_formats.const';
-import { VIDEO_FORMAT } from 'src/app/shared/const/supported_video_formats.const';
+import { AUDIO_FORMAT } from 'src/app/shared/const/supported-audio-formats.const';
+import { VIDEO_FORMAT } from 'src/app/shared/const/supported-video-formats.const';
 import { ControlOptions } from 'src/app/shared/models/control-options.type';
 
 @Injectable({

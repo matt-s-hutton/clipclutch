@@ -9,6 +9,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FG_URL_KEY } from '../shared/const/video-form-url-key.const';
 import { OptionButtonService } from '../services/option-button/option-button.service';
 import { Subscription } from 'rxjs';
+import { ConfigService } from '../services/config/config.service';
+import { Config } from '../shared/models/config.type';
 
 @Component({
   selector: 'cc-landing',
@@ -16,6 +18,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
+  public config: Config;
+
   public videoForm : FormGroup = new FormGroup({});
   public fgUrlKey = FG_URL_KEY;
 
@@ -30,18 +34,23 @@ export class LandingComponent implements OnInit {
   public urlHasNotBeenEntered = true;
 
   private subscriptions: (Subscription | undefined)[] = [];
+  private localStorageDlKey = 'dl';
+  private localStorageExpirationKey = 'expiration';
 
   constructor(
     private fb: FormBuilder,
     private downloadService: DownloadService,
-    private optionButtonService: OptionButtonService
+    private optionButtonService: OptionButtonService,
+    private configService: ConfigService
   ) {
+    this.config = this.configService.config;
     this.videoForm = this.fb.group({
       [this.fgUrlKey]: new FormControl('', [Validators.required, validUrl()]),
     });
   }
 
   ngOnInit(): void {
+    this.setDownloadData();
     this.optionsButtons = this.optionButtonService.getOptionsButtons();
     for (const option of this.optionsButtons) {
       this.videoForm.addControl(option.id, new FormControl(option.default));
@@ -58,9 +67,8 @@ export class LandingComponent implements OnInit {
   }
 
   /**
-   * Subscribes to a FormControl's value changes. If that FormControl is updated with a true value
-   * then set the opposite FormControl to disabled. For use with mutually exclusive option buttons e.g.
-   * can't convert a video to both WebM and MP3.
+   * Makes the format buttons behave like radio buttons. Only one format button can be active at a time.
+   * But also at least one of them must be active.
    * @param formControlName
    * @param allFormatButtons
    * @returns Subscription | undefined
@@ -73,6 +81,10 @@ export class LandingComponent implements OnInit {
             this.videoForm.get(oppositeName.id)?.patchValue(false);
           }
         }
+      }
+      const allDisabled = allFormatButtons.every( (button) => !this.videoForm.get(button.id)?.value);
+      if (allDisabled) {
+        this.videoForm.get(formControlName)?.patchValue(true);
       }
     });
   }
@@ -118,6 +130,8 @@ export class LandingComponent implements OnInit {
   private submitFormSuccess(downloadpath: DownloadDetails): void {
     this.showLoader = false;
     this.dl = downloadpath;
+    localStorage.setItem(this.localStorageDlKey, JSON.stringify(downloadpath));
+    localStorage.setItem(this.localStorageExpirationKey, Date.now().toString());
   }
 
   private submitFormError(error: HttpErrorResponse): void {
@@ -132,8 +146,8 @@ export class LandingComponent implements OnInit {
   private getOptions(): DownloadOptions {
     const options: DownloadOptions = {
       convertFormat: '',
-      embedSubs: this.videoForm.get(this.optionButtonService.getEmbedSubsId())?.value,
-      getThumbnail: this.videoForm.get(this.optionButtonService.getThumbnailId())?.value
+      embedSubs: this.videoForm.get(this.optionButtonService.getEmbedSubsId())?.value ?? false,
+      getThumbnail: this.videoForm.get(this.optionButtonService.getThumbnailId())?.value ?? false
     };
     const formatIds = this.optionButtonService.getFormatOptionsIds();
     for (const controlName in this.videoForm.controls) {
@@ -145,4 +159,20 @@ export class LandingComponent implements OnInit {
     return options;
   }
 
+  /**
+   * Clear local storage if older than 25 minutes, else set dl value to what is in local storage.
+   * @returns void
+   */
+  private setDownloadData(): void {
+    const expiry = Number(localStorage.getItem(this.localStorageExpirationKey));
+    if (!isNaN(expiry) && Math.floor((Date.now() - expiry) / 60000) > this.config.minutesToExpiry) {
+      localStorage.removeItem(this.localStorageDlKey);
+      localStorage.removeItem(this.localStorageExpirationKey);
+      return;
+    }
+    const dlString = localStorage.getItem(this.localStorageDlKey);
+    if (dlString !== null) {
+      this.dl = JSON.parse(dlString);
+    }
+  }
 }

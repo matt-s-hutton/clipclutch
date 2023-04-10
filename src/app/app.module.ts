@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -9,6 +9,7 @@ import { LandingComponent } from './landing/landing.component';
 import { CcOptionsComponent } from './cc-options/cc-options.component';
 import { CcPreviewComponent } from './cc-preview/cc-preview.component';
 import { LoadingAnimationComponent } from './animation/loading/loading-animation/loading-animation.component';
+import { ConfigService } from './services/config/config.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,15 @@ import { LoadingAnimationComponent } from './animation/loading/loading-animation
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    ConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (configService: ConfigService) => () => { return configService.loadConfig(); },
+      deps: [ConfigService],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
