@@ -10,6 +10,7 @@ import { CcOptionsComponent } from './cc-options/cc-options.component';
 import { CcPreviewComponent } from './cc-preview/cc-preview.component';
 import { LoadingAnimationComponent } from './animation/loading/loading-animation/loading-animation.component';
 import { ConfigService } from './services/config/config.service';
+import { CcAboutComponent } from './cc-about/cc-about.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ConfigService } from './services/config/config.service';
     CcOptionsComponent,
     CcPreviewComponent,
     LoadingAnimationComponent,
+    CcAboutComponent,
   ],
   imports: [
     BrowserModule,

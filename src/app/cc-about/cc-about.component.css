@@ -1,0 +1,14 @@
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+h3 {
+    background: var(--ABOUT_CARD_HEADER_BG);
+}
+
+#content {
+    margin: 1rem;
+}

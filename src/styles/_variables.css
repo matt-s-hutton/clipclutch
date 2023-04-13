@@ -2,18 +2,45 @@
 
 :root {
     --FF: 'Montserrat', sans-serif;
-    --FF_CONTROL_HEAD: 'Quicksand', sans-serif;
 
-    /* || Colours */
-    --CARD_BG: whitesmoke;
-    --CARD_BORDER_RADIUS: 5px;
+    /* Colours */
+    /* Shared */
+    --BG: #f5f8ff;
+    --CARD_BG: rgb(255, 255, 255);
+    --CARD_BOX_SHADOW: #cfcfcf;
+    --CARD_TITLE: #fff;
+    --CARD_HEADER: linear-gradient(10deg, rgba(63,94,251,1) 19%, rgba(60,180,214,1) 91%);
+
+    /* URL Card */
+    --URL_CARD_HEADER_BG: linear-gradient(10deg, rgba(161,72,217,1) 12%, rgba(230,136,182,1) 85%);
+    --URL_CARD_INPUT_BG: linear-gradient(to right, #e28dbf, #eec77f);
     --URL_CARD_INPUT_BORDER: #3b3d44;
-    --OPTIONS_TITLE_BG: #e07a5f;
-    --CARD_TITLE: white;
-    --OPTIONS_CHECKBOX_ACTIVE: #2196F3;
-    --OPTIONS_CHECKBOX_INACTIVE: #dbdada;
-    --OPTIONS_CHECKBOX_SLIDER: white;
-    --OPTIONS_CHECKBOX_HEADER: #3b3d44;
+    --URL_CARD_INPUT_PLACEHOLDER_ERROR: #C44536;
+    --URL_CARD_DOWNLOAD_BUTTON: var(--URL_CARD_HEADER_BG);
+    --URL_CARD_DOWNLOAD_BUTTON_HOVER: #a8aaad;
+    --URL_CARD_DOWNLOAD_BUTTON_DISABLED: #525457a4;
 
-    --SPINNER: #e6eeeab4;
+    /* Options Card */
+    --OPTIONS_CARD_HEADER_BG: linear-gradient(10deg, rgba(63,94,251,1) 19%, rgba(60,180,214,1) 91%);
+    --OPTIONS_CARD_CHECKBOX_ACTIVE: rgba(63,94,251,1);
+    --OPTIONS_CARD_CHECKBOX_INACTIVE: #dbdada;
+    --OPTIONS_CARD_CHECKBOX_SLIDER: #fff;
+    --OPTIONS_CARD_CHECKBOX_HEADER: #3b3d44;
+    --OPTIONS_CARD_TOOLTIP_BG: #000;
+    --OPTIONS_CARD_TOOLTIP: #fff;
+
+    /* Preview Card */
+    --PREVIEW_CARD_HEADER_BG: linear-gradient(10deg, rgba(102,197,215,1) 17%, rgba(109,227,154,1) 85%);
+    --PREVIEW_CARD_DOWNLOAD_BUTTON_BG: var(--PREVIEW_CARD_HEADER_BG);
+    --PREVIEW_CARD_DOWNLOAD_BUTTON: #fff;
+
+    /* About Card */
+    --ABOUT_CARD_HEADER_BG: linear-gradient(10deg, rgba(213,104,104,1) 17%, rgba(236,165,90,1) 85%);
+
+    /* Loading Animation */
+    --LOADING_SPINNER: rgb(218, 233, 236);
+    --LOADING_FADE_TO: #ffffff00;
+    --LOADING_CENTER: var(--CARD_BG);
+
+    --CARD_BORDER_RADIUS: 5px;
 }

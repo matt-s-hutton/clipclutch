@@ -7,9 +7,13 @@
     font-family: var(--FF);
 }
 
+html {
+    background-color: var(--BG);
+}
+
 .card {
     background-color: var(--CARD_BG);
-    box-shadow: 3px 3px 5px rgb(207, 207, 207);
+    box-shadow: 3px 3px 5px var(--CARD_BOX_SHADOW);
     border-radius: var(--CARD_BORDER_RADIUS);
 }
 
