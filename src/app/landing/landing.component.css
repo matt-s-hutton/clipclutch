@@ -2,7 +2,7 @@
     margin-left: auto;
     margin-right: auto;
     width: 90%;
-    max-width: 50rem;
+    max-width: 55rem;
 }
 
 .controls-section {
@@ -38,7 +38,8 @@
 #url-card input {
     background: var(--URL_CARD_INPUT_BG);
     border: none;
-    color: white;
+    color: var(--URL_CARD_INPUT);
+    caret-color: var(--URL_CARD_INPUT_CARET);
     font-size: 1rem;
     height: 3rem;
     padding: 0 1rem;
@@ -50,57 +51,29 @@
 }
 
 #url-card input::placeholder {
-    color: white;
+    color: var(--URL_CARD_INPUT_PLACEHOLDER);
 }
-/* #url-card input.placehold-error-text::placeholder {
-    color: var(--URL_CARD_INPUT_PLACEHOLDER_ERROR);
-} */
 
 #url-card button {
-    /* position: relative; */
-    /* top: .4rem;
-    right: 3.2rem;
-    width: 32px;
-    height: 24px;
-    padding: 1rem;
-    box-sizing: content-box; */
+    color: var(--FLAT-BLACK);
     font-size: large;
     border-radius: 5px;
     margin: .5rem .5rem 0 .5rem;
     padding: .5rem;
-    color: white;
-    background: var(--URL_CARD_DOWNLOAD_BUTTON);
-    outline: none;
-    border: none;
+    border: 1px solid var(--URL_CARD_DOWNLOAD_BUTTON_BORDER);
+    background: none;
     cursor: pointer;
 }
 
 #url-card button.button-disabled {
-    box-shadow: inset 0 0 0 1000px rgba(194, 194, 194, 0.568);
+    color: var(--URL_CARD_DOWNLOAD_BUTTON_DISABLED);
+    background-color: var(--URL_CARD_DOWNLOAD_BUTTON_DISABLED_BG);
 }
 
 #url-card button.button-disabled:hover {
     cursor: default;
 }
 
-/*
-
-#url-card button.button-disabled:hover > svg {
-    fill: var(--URL_CARD_DOWNLOAD_BUTTON_DISABLED);
+#urlError {
+    margin-top: .5rem;
 }
-
-#url-card .button-disabled > svg {
-    fill: var(--URL_CARD_DOWNLOAD_BUTTON_DISABLED);
-}
-
-#url-card svg {
-    fill: var(--URL_CARD_DOWNLOAD_BUTTON);
-    background: none;
-    border: none;
-    width: 16px;
-    height: 16px;
-}
-
-#url-card button:hover > svg {
-    fill: var(--URL_CARD_DOWNLOAD_BUTTON_HOVER);
-} */

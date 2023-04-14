@@ -28,7 +28,7 @@
 }
 
 .button-container {
-    width: 7rem;
+    flex-basis: 7rem;
     height: 4rem;
     margin: .5rem;
 }
@@ -83,8 +83,6 @@ h5 {
 }
 
 .options-checkbox:checked + .slider:before {
-    -webkit-transform: translateX(1.85rem);
-    -ms-transform: translateX(1.85rem);
     transform: translateX(1.85rem);
 }
 

@@ -5,10 +5,58 @@
     flex-wrap: wrap;
 }
 
-h3 {
+#content {
+    margin: 1rem;
+}
+
+.section {
+    margin-bottom: 1rem;
+}
+
+#how-to-intro {
+    margin-top: .5rem;
+}
+
+#feature-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+p {
+    color: var(--FLAT-BLACK);
+}
+
+.feature {
+    max-width: 90%;
+}
+
+.feature > p {
+    text-align: center;
+}
+
+h3.card-title {
     background: var(--ABOUT_CARD_HEADER_BG);
 }
 
-#content {
-    margin: 1rem;
+.section > h3 {
+    text-align: center;
+    color: var(--ABOUT_CARD_SECTION_HEADER);
+    font-size: larger;
+    margin-bottom: .5rem;
+}
+
+h4 {
+    text-align: center;
+    color: rgb(213, 144, 104);
+}
+
+.icon {
+    display: block;
+    fill: rgb(213, 144, 104);
+    height: 64px;
+    width: 64px;
+    margin-left: auto;
+    margin-right: auto;
 }
