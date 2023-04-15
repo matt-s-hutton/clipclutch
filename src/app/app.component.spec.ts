@@ -34,6 +34,6 @@ describe('AppComponent', () => {
   it(`should have as title 'cc'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('cc');
+    expect(app.title).toEqual('Clip Clutch');
   });
 });

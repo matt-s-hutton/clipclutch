@@ -3,9 +3,8 @@
 }
 
 #options-card > h3 {
-    background-color: var(--OPTIONS_TITLE_BG);
+    background: var(--OPTIONS_CARD_HEADER_BG);
     color: var(--CARD_TITLE);
-    font-family: var(--FF_CONTROL_HEAD);
     text-transform: uppercase;
     text-align: center;
     writing-mode: vertical-lr;
@@ -29,13 +28,13 @@
 }
 
 .button-container {
-    width: 7rem;
+    flex-basis: 7rem;
     height: 4rem;
     margin: .5rem;
 }
 
 h5 {
-    color: var(--OPTIONS_CHECKBOX_HEADER);
+    color: var(--OPTIONS_CARD_CHECKBOX_HEADER);
     text-align: center;
     margin-bottom: .5rem;
     cursor: default;
@@ -50,11 +49,11 @@ h5 {
 .tooltip > .tooltiptext {
     position: absolute;
     bottom: 1rem;
-    left: 6.7rem;
+    right: 5rem;
     visibility: hidden;
     width: 8rem;
-    background-color: black;
-    color: #fff;
+    background-color: var(--OPTIONS_CARD_TOOLTIP_BG);
+    color: var(--OPTIONS_CARD_TOOLTIP);
     text-align: center;
     border-radius: 5px;
     padding: .2rem .1rem;
@@ -80,12 +79,10 @@ h5 {
 }
 
 .options-checkbox:checked + .slider {
-    background-color: var(--OPTIONS_CHECKBOX_ACTIVE);
+    background: var(--OPTIONS_CARD_CHECKBOX_ACTIVE);
 }
 
 .options-checkbox:checked + .slider:before {
-    -webkit-transform: translateX(1.85rem);
-    -ms-transform: translateX(1.85rem);
     transform: translateX(1.85rem);
 }
 
@@ -93,7 +90,7 @@ h5 {
     position: absolute;
     cursor: pointer;
     inset: 0;
-    background-color: var(--OPTIONS_CHECKBOX_INACTIVE);
+    background-color: var(--OPTIONS_CARD_CHECKBOX_INACTIVE);
     -webkit-transition: .4s;
     transition: .4s;
     border-radius: 34px;
@@ -106,7 +103,7 @@ h5 {
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: var(--OPTIONS_CHECKBOX_SLIDER);
+    background-color: var(--OPTIONS_CARD_CHECKBOX_SLIDER);
     -webkit-transition: .4s;
     transition: .4s;
     border-radius: 50%;

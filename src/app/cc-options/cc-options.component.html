@@ -1,5 +1,5 @@
 <div class="card" id="options-card">
-    <h3>Options</h3>
+    <h3 class="no-select">Options</h3>
     <div [formGroup]="videoForm"  id="options-buttons">
         <div class="button-container" *ngFor="let button of optionsButtons">
             <h5 class="no-select" [ngClass]="{'tooltip': !!button.description}">

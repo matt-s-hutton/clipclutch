@@ -1,0 +1,14 @@
+h3.card-title {
+    background: linear-gradient(10deg, rgba(213,104,104,1) 17%, rgba(236,165,90,1) 85%);
+}
+
+#content {
+    width: 90%;
+    padding: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section {
+    margin: 1rem 0;
+}

@@ -1,0 +1,60 @@
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#content {
+    margin: 1rem;
+    width: 70%;
+}
+
+h3.card-title {
+    background: linear-gradient(10deg, rgba(213,104,104,1) 17%, rgba(236,165,90,1) 85%);
+}
+
+#email-warning {
+    position:relative;
+    bottom: 1rem;
+    color: rgb(218, 52, 52);
+    font-size: .8rem;
+}
+
+.contact-form-field {
+    margin-bottom: 1rem;
+    width: 90%;
+}
+
+.contact-form-field:focus {
+    outline: none;
+    border: 1px solid #969696;
+}
+
+textarea {
+    display: block;
+    min-height: 4rem;
+    max-width: 100%;
+    border: 1px solid rgba(175, 175, 175, 0.541);
+    font-size: x-large;
+}
+
+input {
+    display: block;
+    border: 1px solid rgba(175, 175, 175, 0.541);
+    font-size: x-large;
+}
+
+span {
+    color: rgb(218, 52, 52);
+}
+
+button {
+    background: none;
+    color: var(--FLAT-BLACK);
+    border: 1px solid rgba(175, 175, 175, 0.541);
+    border-radius: 5px;
+    font-size: large;
+    padding: .5rem;
+    cursor: pointer;
+}
