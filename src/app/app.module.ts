@@ -11,6 +11,10 @@ import { CcPreviewComponent } from './cc-preview/cc-preview.component';
 import { LoadingAnimationComponent } from './animation/loading/loading-animation/loading-animation.component';
 import { ConfigService } from './services/config/config.service';
 import { CcAboutComponent } from './cc-about/cc-about.component';
+import { CcPrivacyPolicyComponent } from './cc-privacy-policy/cc-privacy-policy.component';
+import { CcTermsOfServiceComponent } from './cc-terms-of-service/cc-terms-of-service.component';
+import { FooterComponent } from './footer/footer.component';
+import { CcContactComponent } from './cc-contact/cc-contact.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +24,10 @@ import { CcAboutComponent } from './cc-about/cc-about.component';
     CcPreviewComponent,
     LoadingAnimationComponent,
     CcAboutComponent,
+    CcPrivacyPolicyComponent,
+    CcTermsOfServiceComponent,
+    FooterComponent,
+    CcContactComponent,
   ],
   imports: [
     BrowserModule,

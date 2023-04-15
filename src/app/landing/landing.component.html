@@ -1,5 +1,5 @@
-<div id="controls-section">
-    <form [formGroup]="videoForm" id="controls-card">
+<div>
+    <form [formGroup]="videoForm" id="controls-card" class="card-center">
         <div class="card controls-section" id="url-card">
             <h3 class="card-title no-select">Media</h3>
             <div>
@@ -7,6 +7,7 @@
                     <input
                         placeholder="{{ urlPlaceholder }}"
                         [ngClass]="{'placehold-error-text': urlPlaceholderErrorDisplayed}"
+                        class="input"
                         (keyup.enter)="submitForm()"
                         type="text"
                         name="video-url"

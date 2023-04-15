@@ -39,12 +39,14 @@
 
     /* About Card */
     --ABOUT_CARD_HEADER_BG: linear-gradient(10deg, rgba(213,104,104,1) 17%, rgba(236,165,90,1) 85%);
-    --ABOUT_CARD_SECTION_HEADER: rgb(119, 119, 119);
+    --ABOUT_CARD_SECTION_HEADER: #323436;
 
     /* Loading Animation */
     --LOADING_SPINNER: rgb(218, 233, 236);
     --LOADING_FADE_TO: #ffffff00;
     --LOADING_CENTER: var(--CARD_BG);
 
+    /* Sizes */
     --CARD_BORDER_RADIUS: 5px;
+    --CARD_MAX_WIDTH: 55rem;
 }

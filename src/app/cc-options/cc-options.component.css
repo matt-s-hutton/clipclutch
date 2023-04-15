@@ -49,7 +49,7 @@ h5 {
 .tooltip > .tooltiptext {
     position: absolute;
     bottom: 1rem;
-    left: 6.7rem;
+    right: 5rem;
     visibility: hidden;
     width: 8rem;
     background-color: var(--OPTIONS_CARD_TOOLTIP_BG);

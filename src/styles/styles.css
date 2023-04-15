@@ -31,3 +31,12 @@ html {
     -ms-user-select: none;
     user-select: none;
 }
+
+.card-center {
+    max-width: var(--CARD_MAX_WIDTH);
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
