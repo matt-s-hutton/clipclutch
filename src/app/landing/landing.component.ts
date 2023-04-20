@@ -28,6 +28,11 @@ export class LandingComponent implements OnInit {
   public urlPlaceholderErrorDisplayed = false;
   public optionsButtons: ControlOptions[] = [];
   public showLoader = false;
+  public media = 'video';
+
+  public formatOptionIds: string[] = this.optionButtonService.getFormatOptionsIds();
+  public videoFormatOptionIds: string[] = this.optionButtonService.getVideoFormatOptionsIds();
+  public audioFormatOptionIds: string[] = this.optionButtonService.getAudioFormatOptionsIds();
 
   public dl: DownloadDetails | null = null;
   public downloadErrorMessage = '';
@@ -62,20 +67,20 @@ export class LandingComponent implements OnInit {
     this.subscriptions.push(this.listenForErrors());
     const formatOptions: ControlOptions[] = this.optionButtonService.getFormatOptionsButtons();
     for (const option of formatOptions) {
-      this.subscriptions.push(this.setOppositeFormatDisabled(option.id, formatOptions));
+      this.subscriptions.push(this.listenToFormatOptionsChanges(option.id, formatOptions));
     }
   }
 
   /**
-   * Makes the format buttons behave like radio buttons. Only one format button can be active at a time.
-   * But also at least one of them must be active.
+   * Listens for value changes to format options buttons
    * @param formControlName
    * @param allFormatButtons
    * @returns Subscription | undefined
    */
-  private setOppositeFormatDisabled(formControlName: string, allFormatButtons: ControlOptions[]): Subscription | undefined {
+  private listenToFormatOptionsChanges(formControlName: string, allFormatButtons: ControlOptions[]): Subscription | undefined {
     return this.videoForm.get(formControlName)?.valueChanges.subscribe( (value: boolean) => {
       if (value) {
+        this.media = this.videoFormatOptionIds.includes(formControlName) ? 'video' : 'audio';
         for (const oppositeName of allFormatButtons) {
           if (oppositeName.id !== formControlName) {
             this.videoForm.get(oppositeName.id)?.patchValue(false);
@@ -112,7 +117,7 @@ export class LandingComponent implements OnInit {
    */
   public submitForm(): void {
     if (this.urlHasNotBeenEntered) {
-      this.urlPlaceholder = "URL required";
+      this.urlPlaceholder = "URL required!";
       this.urlPlaceholderErrorDisplayed = true;
       return;
     }
@@ -149,10 +154,9 @@ export class LandingComponent implements OnInit {
       embedSubs: this.videoForm.get(this.optionButtonService.getEmbedSubsId())?.value ?? false,
       getThumbnail: this.videoForm.get(this.optionButtonService.getThumbnailId())?.value ?? false
     };
-    const formatIds = this.optionButtonService.getFormatOptionsIds();
     for (const controlName in this.videoForm.controls) {
       const control = this.videoForm.get(controlName);
-      if (formatIds.includes(controlName) && control?.value) {
+      if (this.formatOptionIds.includes(controlName) && control?.value) {
         options.convertFormat = controlName;
       }
     }

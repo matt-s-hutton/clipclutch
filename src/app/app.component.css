@@ -1,0 +1,33 @@
+#title-container {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    width: 20rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+}
+
+#title-container svg {
+    position: relative;
+    left: .3rem;
+    height: 64px;
+    width: 64px;
+}
+
+#title-container h1 {
+    align-self: flex-end;
+    padding-bottom: .1rem;
+    color: rgb(94, 94, 94);
+    text-align: center;
+}
+
+#page {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+#footer {
+    margin-top: auto;
+}

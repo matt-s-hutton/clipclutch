@@ -1,0 +1,19 @@
+<div class="card card-center" id="container">
+    <h3 class="card-title no-select">Contact</h3>
+    <div id="content">
+        <form [formGroup]="contactForm">
+            <div>
+                <label>Email <span>*</span>
+                    <input class="contact-form-field" type="email" formControlName="{{emailControlName}}">
+                </label>
+                <p id="email-warning" *ngIf="emailInvalid">Please enter a valid email address</p>
+            </div>
+            <div>
+                <label> Message
+                    <textarea class="contact-form-field" formControlName="{{messageControlName}}"></textarea>
+                </label>
+            </div>
+            <button (click)="send()">Send</button>
+        </form>
+    </div>
+</div>

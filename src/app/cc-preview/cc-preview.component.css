@@ -5,8 +5,9 @@
     flex-wrap: wrap;
 }
 
+
 h3 {
-    background-color: #73a772;
+    background: var(--PREVIEW_CARD_HEADER_BG);
 }
 
 #content {
@@ -29,10 +30,12 @@ p {
 }
 
 .download-anchor {
-    color: white;
+    color: var(--PREVIEW_CARD_DOWNLOAD_BUTTON);
     text-decoration: none;
-    margin: .5rem;
+    margin: .5rem .5rem 0 .5rem;
     padding: .5rem;
-    background-color: #53aaf1;
+    background: none;
+    border: solid 1px var(--PREVIEW_CARD_DOWNLOAD_BUTTON_BORDER);
     border-radius: 5px;
+    font-size: large;
 }

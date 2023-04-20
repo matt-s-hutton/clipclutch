@@ -5,7 +5,7 @@
     margin-left: auto;
     margin-right: auto;
     border-radius: 50%;
-    background: linear-gradient(to right, var(--SPINNER) 10%, rgba(255, 255, 255, 0) 42%);
+    background: linear-gradient(to right, var(--LOADING_SPINNER) 10%, var(--LOADING_FADE_TO) 42%);
     position: relative;
     animation: rotate 1.4s infinite linear;
     transform: translateZ(0);
@@ -14,7 +14,7 @@
 .loader:before {
     width: 50%;
     height: 50%;
-    background: var(--SPINNER);
+    background: var(--LOADING_SPINNER);
     border-radius: 100% 0 0 0;
     position: absolute;
     top: 0;
@@ -23,7 +23,7 @@
 }
 
 .loader:after {
-    background: whitesmoke;
+    background: var(--LOADING_CENTER);
     width: 75%;
     height: 75%;
     border-radius: 50%;
@@ -44,21 +44,3 @@
         transform: rotate(360deg);
     }
 }
-
-/* @keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-div {
-    animation-name: rotate;
-    animation-duration: 2s;
-    animation-timing-function: linear;
-    animation-delay: 0s;
-    animation-iteration-count: infinite;
-} */

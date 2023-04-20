@@ -56,9 +56,33 @@ export class OptionButtonService {
     return this.filterOptionsByHeading(VIDEO_FORMAT.concat(AUDIO_FORMAT));
   }
 
+  public getVideoFormatOptionsButtons(): ControlOptions[] {
+    return this.filterOptionsByHeading(VIDEO_FORMAT);
+  }
+
+  public getAudioFormatOptionsButtons(): ControlOptions[] {
+    return this.filterOptionsByHeading(AUDIO_FORMAT);
+  }
+
   public getFormatOptionsIds(): string[] {
     const optionIds: string[] = [];
     for (const option of this.getFormatOptionsButtons()) {
+      optionIds.push(option.id);
+    }
+    return optionIds;
+  }
+
+  public getVideoFormatOptionsIds(): string[] {
+    const optionIds: string[] = [];
+    for (const option of this.getVideoFormatOptionsButtons()) {
+      optionIds.push(option.id);
+    }
+    return optionIds;
+  }
+
+  public getAudioFormatOptionsIds(): string[] {
+    const optionIds: string[] = [];
+    for (const option of this.getAudioFormatOptionsButtons()) {
       optionIds.push(option.id);
     }
     return optionIds;

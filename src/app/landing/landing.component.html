@@ -1,35 +1,37 @@
-<div id="controls-section">
-    <form [formGroup]="videoForm" id="controls-card">
-        <span class="card controls-section" id="url-card">
-            <h3 class="card-title">Media</h3>
+<div>
+    <form [formGroup]="videoForm" id="controls-card" class="card-center">
+        <div class="card controls-section" id="url-card">
+            <h3 class="card-title no-select">Media</h3>
             <div>
-                <label for="video-url">
+                <label for="video-url" id="url-io">
                     <input
                         placeholder="{{ urlPlaceholder }}"
                         [ngClass]="{'placehold-error-text': urlPlaceholderErrorDisplayed}"
+                        class="input"
                         (keyup.enter)="submitForm()"
                         type="text"
                         name="video-url"
                         id="video-url"
                         formControlName="{{ fgUrlKey }}"
                         autocomplete="off">
-                    <button (click)="submitForm()" [ngClass]="{'button-disabled': urlHasNotBeenEntered}">
-                        <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24">
-                            <path d="m13.025 1-2.847 2.828 6.176 6.176H0v3.992h16.354l-6.176 6.176L13.025 23 24 12z"/>
-                        </svg>
-                    </button>
+                    <div>
+                        <button (click)="submitForm()" [ngClass]="{'button-disabled': urlHasNotBeenEntered}">
+                            Get {{media | titlecase}}
+                        </button>
+                        <button>Paste URL</button>
+                    </div>
                 </label>
-                <p>{{ urlError }}</p>
+                <p id="urlError">{{ urlError }}</p>
             </div>
-        </span>
+        </div>
         <div class="controls-section">
             <cc-preview [show]="showLoader || !!dl?.path" [loading]="showLoader" [dl]="dl"></cc-preview>
         </div>
         <div class="controls-section">
             <cc-options [formGroup]="videoForm" [optionsButtons]="optionsButtons"></cc-options>
+        </div>
+        <div class="controls-section">
+            <cc-about></cc-about>
         </div>
     </form>
 </div>
