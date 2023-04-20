@@ -13,6 +13,9 @@ export class DownloadService {
   constructor(private http: HttpClient, private configService: ConfigService) { }
 
   getDownloadLink(downloadParameters: DownloadParameters): Observable<DownloadResponse> {
-    return this.http.post<DownloadResponse>(`${this.configService.config.baseUrl}/api/requestdownload`, downloadParameters);
+    const baseUrl = this.configService.config.baseUrl;
+    const apiPath = this.configService.config.apiPath;
+    const apiDownloadPath = this.configService.config.apiDownloadPath;
+    return this.http.post<DownloadResponse>(`${baseUrl}${apiPath}${apiDownloadPath}`, downloadParameters);
   }
 }
