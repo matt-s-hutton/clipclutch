@@ -16,7 +16,7 @@
                         autocomplete="off">
                     <div>
                         <button (click)="submitForm()" [ngClass]="{'button-disabled': urlHasNotBeenEntered}">
-                            Get {{media | titlecase}}
+                            Get {{ media | titlecase }}
                         </button>
                         <button>Paste URL</button>
                     </div>
@@ -25,7 +25,11 @@
             </div>
         </div>
         <div class="controls-section">
-            <cc-preview [show]="showLoader || !!dl?.path" [loading]="showLoader" [dl]="dl"></cc-preview>
+            <cc-preview [show]="showLoader || !!dl?.path || !!downloadErrorMessage"
+                [loading]="showLoader"
+                [dl]="dl"
+                [error]="downloadErrorMessage">
+            </cc-preview>
         </div>
         <div class="controls-section">
             <cc-options [formGroup]="videoForm" [optionsButtons]="optionsButtons"></cc-options>

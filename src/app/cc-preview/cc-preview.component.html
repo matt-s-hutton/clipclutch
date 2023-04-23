@@ -4,15 +4,18 @@
         <cc-loading-animation *ngIf="loading; else loaded"></cc-loading-animation>
     </div>
     <ng-template #loaded>
-        <audio controls *ngIf="dl?.media === 'audio'; else video">
-            <source src="{{ dl?.path }}" type="audio/{{ dl?.format }}">
-            Your browser does not support HTML native playback of audio.
-        </audio>
-        <p>Content will expire after {{config.minutesToExpiry}} minutes!</p>
-        <div id="anchor-container">
-            <a class="download-anchor" href="{{baseUrl}}{{dl?.path}}" download>Download</a>
-            <a class="download-anchor" *ngIf="dl?.thumbnail" href="{{dl?.thumbnail}}">Thumbnail</a>
-        </div>
+        <p *ngIf="error; else noError">{{ error }}</p>
+        <ng-template #noError>
+            <audio controls *ngIf="dl?.media === 'audio'; else video" >
+                <source src="{{ dl?.path }}" type="audio/{{ dl?.format }}">
+                Your browser does not support HTML native playback of audio.
+            </audio>
+            <p>Content will expire after {{config.minutesToExpiry}} minutes!</p>
+            <div id="anchor-container">
+                <a class="download-anchor" href="{{ baseUrl }}{{ dl?.path }}" download>Download</a>
+                <a class="download-anchor" *ngIf="dl?.thumbnail" href="{{ dl?.thumbnail }}">Thumbnail</a>
+            </div>
+        </ng-template>
     </ng-template>
     <ng-template #video>
         <video width="320" height="180" controls>

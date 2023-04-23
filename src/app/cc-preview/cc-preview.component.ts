@@ -12,6 +12,7 @@ export class CcPreviewComponent {
   @Input() show = false;
   @Input() loading = false;
   @Input() dl: DownloadDetails | null = null;
+  @Input() error: string | null = null;
 
   public config: Config;
   public baseUrl: string;

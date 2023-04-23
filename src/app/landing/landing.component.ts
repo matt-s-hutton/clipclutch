@@ -4,7 +4,7 @@ import { ControlOptions } from '../shared/models/control-options.type';
 import { validUrl } from '../shared/validators/valid-url';
 import { DownloadOptions, DownloadParameters } from '../shared/models/download-parameters.type';
 import { DownloadService } from '../services/download/download.service';
-import { DownloadDetails, DownloadResponse } from '../shared/models/download-response.type';
+import { DownloadDetails } from '../shared/models/download-response.type';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FG_URL_KEY } from '../shared/const/video-form-url-key.const';
 import { OptionButtonService } from '../services/option-button/option-button.service';
@@ -117,7 +117,7 @@ export class LandingComponent implements OnInit {
    */
   public submitForm(): void {
     if (this.urlHasNotBeenEntered) {
-      this.urlPlaceholder = "URL required!";
+      this.urlPlaceholder = 'URL required!';
       this.urlPlaceholderErrorDisplayed = true;
       return;
     }
@@ -127,15 +127,15 @@ export class LandingComponent implements OnInit {
       options: this.getOptions()
     };
     this.downloadService.getDownloadLink(downloadParameters).subscribe({
-      next: (response: DownloadResponse) => this.submitFormSuccess(response.message),
+      next: (response: DownloadDetails) => this.submitFormSuccess(response),
       error: (e: HttpErrorResponse) => this.submitFormError(e)
     });
   }
 
-  private submitFormSuccess(downloadpath: DownloadDetails): void {
+  private submitFormSuccess(download: DownloadDetails): void {
     this.showLoader = false;
-    this.dl = downloadpath;
-    localStorage.setItem(this.localStorageDlKey, JSON.stringify(downloadpath));
+    this.dl = download;
+    localStorage.setItem(this.localStorageDlKey, JSON.stringify(download));
     localStorage.setItem(this.localStorageExpirationKey, Date.now().toString());
   }
 
