@@ -11,6 +11,10 @@
     --CARD_TITLE: #fff;
     --CARD_HEADER: linear-gradient(10deg, rgba(63,94,251,1) 19%, rgba(60,180,214,1) 91%);
     --FLAT-BLACK: #353434;
+    --BUTTON_BORDER: rgba(175, 175, 175, 0.541);
+    --BUTTON_DISABLED: rgb(165, 165, 165);
+    --BUTTON_DISABLED_BG: rgb(231, 231, 231);
+
 
     /* URL Card */
     --URL_CARD_HEADER_BG: linear-gradient(10deg, rgba(161,72,217,1) 12%, rgba(230,136,182,1) 85%);
@@ -18,9 +22,6 @@
     --URL_CARD_INPUT: rgb(56, 56, 56);
     --URL_CARD_INPUT_CARET: rgba(120, 120, 120, 0.6);
     --URL_CARD_INPUT_PLACEHOLDER: rgba(66, 66, 66, 0.541);
-    --URL_CARD_DOWNLOAD_BUTTON_BORDER: rgba(175, 175, 175, 0.541);
-    --URL_CARD_DOWNLOAD_BUTTON_DISABLED: rgb(165, 165, 165);
-    --URL_CARD_DOWNLOAD_BUTTON_DISABLED_BG: rgb(231, 231, 231);
 
     /* Options Card */
     --OPTIONS_CARD_HEADER_BG: linear-gradient(10deg, rgba(63,94,251,1) 19%, rgba(60,180,214,1) 91%);

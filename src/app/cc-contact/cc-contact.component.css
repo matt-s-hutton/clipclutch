@@ -21,6 +21,11 @@ h3.card-title {
     font-size: .8rem;
 }
 
+#send-result {
+    margin-top: .8rem;
+    margin-left: .1rem;
+}
+
 .contact-form-field {
     margin-bottom: 1rem;
     width: 90%;
@@ -50,11 +55,5 @@ span {
 }
 
 button {
-    background: none;
-    color: var(--FLAT-BLACK);
-    border: 1px solid rgba(175, 175, 175, 0.541);
-    border-radius: 5px;
-    font-size: large;
-    padding: .5rem;
-    cursor: pointer;
+    margin: 0;
 }

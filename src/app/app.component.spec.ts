@@ -6,6 +6,7 @@ import { LandingComponent } from './landing/landing.component';
 import { CcOptionsComponent } from './cc-options/cc-options.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CcPreviewComponent } from './cc-preview/cc-preview.component';
+import { FooterComponent } from './footer/footer.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -20,7 +21,8 @@ describe('AppComponent', () => {
         AppComponent,
         LandingComponent,
         CcOptionsComponent,
-        CcPreviewComponent
+        CcPreviewComponent,
+        FooterComponent
       ],
     }).compileComponents();
   });
@@ -31,9 +33,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'cc'`, () => {
+  it(`should have as title 'ClipClutch'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Clip Clutch');
+    expect(app.title).toEqual('ClipClutch');
   });
 });

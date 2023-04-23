@@ -15,10 +15,10 @@
                         formControlName="{{ fgUrlKey }}"
                         autocomplete="off">
                     <div>
-                        <button (click)="submitForm()" [ngClass]="{'button-disabled': urlHasNotBeenEntered}">
+                        <button class="button" (click)="submitForm()" [ngClass]="{'button-disabled': urlHasNotBeenEntered}">
                             Get {{ media | titlecase }}
                         </button>
-                        <button>Paste URL</button>
+                        <button class="button">Paste URL</button>
                     </div>
                 </label>
                 <p id="urlError">{{ urlError }}</p>

@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
 import { CcOptionsComponent } from './cc-options/cc-options.component';
 import { CcPreviewComponent } from './cc-preview/cc-preview.component';
-import { LoadingAnimationComponent } from './animation/loading/loading-animation/loading-animation.component';
+import { LoadingAnimationComponent } from './animation/loading/loading-animation.component';
 import { ConfigService } from './services/config/config.service';
 import { CcAboutComponent } from './cc-about/cc-about.component';
 import { CcPrivacyPolicyComponent } from './cc-privacy-policy/cc-privacy-policy.component';

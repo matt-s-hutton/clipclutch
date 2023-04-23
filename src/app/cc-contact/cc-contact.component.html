@@ -13,7 +13,8 @@
                     <textarea class="contact-form-field" formControlName="{{messageControlName}}"></textarea>
                 </label>
             </div>
-            <button (click)="send()">Send</button>
+            <button (click)="send()" class="button" [ngClass]="{'button-disabled': emailInvalid || emailNotEntered}">Send</button>
         </form>
+        <p id="send-result">{{ sendResult }}</p>
     </div>
 </div>

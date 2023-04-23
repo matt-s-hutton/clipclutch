@@ -10,9 +10,11 @@ import { FG_URL_KEY } from '../shared/const/video-form-url-key.const';
 import { DownloadService } from '../services/download/download.service';
 import { Observable, of, throwError } from 'rxjs';
 import { DownloadOptions, DownloadParameters } from '../shared/models/download-parameters.type';
-import { DownloadResponse } from '../shared/models/download-response.type';
+import { DownloadDetails } from '../shared/models/download-response.type';
 import { HttpErrorResponse } from '@angular/common/http';
 import { OptionButtonService } from '../services/option-button/option-button.service';
+import { CcAboutComponent } from '../cc-about/cc-about.component';
+import { ERROR_RESPONSE } from '../shared/test/const/error-response.const';
 
 describe('LandingComponent', () => {
   let component: LandingComponent;
@@ -20,23 +22,16 @@ describe('LandingComponent', () => {
   let optionsButtonService: OptionButtonService;
   const videoFormStubber: VideoFormStub = new VideoFormStub();
   let getDownloadLinkMock: jasmine.SpyObj<DownloadService>;
-  const downloadLinkErrorResponse: HttpErrorResponse = new HttpErrorResponse(
-    {
-      error: 'Cannot brew coffee',
-      status: 418,
-      statusText: 'I\'m a teapot'
-    }
-  );
-  const downloadLinkSuccessResponse: DownloadResponse = {
-    status: 200,
-    message: {
-      path: 'path',
-      format: 'mp4',
-      media: 'video',
-      thumbnail: null
-    }
+  const downloadLinkErrorResponse: HttpErrorResponse = ERROR_RESPONSE;
+
+  const downloadLinkSuccessResponse: DownloadDetails = {
+    path: 'path',
+    format: 'mp4',
+    media: 'video',
+    thumbnail: null,
+    warning: null
   };
-  const downloadLinkSuccessResponse$: Observable<DownloadResponse> = of(downloadLinkSuccessResponse);
+  const downloadLinkSuccessResponse$: Observable<DownloadDetails> = of(downloadLinkSuccessResponse);
 
   beforeEach(async () => {
     getDownloadLinkMock = jasmine.createSpyObj('DownloadService', ['getDownloadLink']);
@@ -45,7 +40,8 @@ describe('LandingComponent', () => {
       declarations: [
         LandingComponent,
         CcOptionsComponent,
-        CcPreviewComponent
+        CcPreviewComponent,
+        CcAboutComponent
       ],
       providers: [
         {
@@ -71,11 +67,11 @@ describe('LandingComponent', () => {
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('should submit the form with the correct parameters if a valid URL has been entered', () => {
+  it('should submit the form with the correct parameters if a valid URL has been entered', () => {
     // GIVEN
     // A valid URL is entered
     component.urlHasNotBeenEntered = false;
@@ -101,7 +97,7 @@ describe('LandingComponent', () => {
 
     // THEN
     expect(getDownloadLinkMock.getDownloadLink).toHaveBeenCalledWith(downloadParameters);
-    expect(component.dl).toEqual(downloadLinkSuccessResponse.message);
+    expect(component.dl).toEqual(downloadLinkSuccessResponse);
   });
 
   it('should not submit the form if an invalid URL has been entered', () => {
@@ -117,7 +113,7 @@ describe('LandingComponent', () => {
     expect(component.dl).toEqual(null);
   });
 
-  xit('should update downloadErrorMessage if the API returns an error', () => {
+  it('should update downloadErrorMessage if the API returns an error', () => {
     // GIVEN
     getDownloadLinkMock.getDownloadLink.and.returnValue(throwError(() => downloadLinkErrorResponse));
     component.urlHasNotBeenEntered = false;
@@ -130,7 +126,7 @@ describe('LandingComponent', () => {
     expect(component.downloadErrorMessage).toEqual(downloadLinkErrorResponse.message);
   });
 
-  xit('should not show the loader after the API has completed a download ', () => {
+  it('should not show the loader after the API has completed a download ', () => {
     // GIVEN
     component.urlHasNotBeenEntered = false;
     component.showLoader = true;
@@ -143,10 +139,10 @@ describe('LandingComponent', () => {
 
     // THEN
     expect(component.showLoader).toBeFalse();
-    expect(component.dl).toEqual(downloadLinkSuccessResponse.message);
+    expect(component.dl).toEqual(downloadLinkSuccessResponse);
   });
 
-  xit('should not show the loader after the API has returned an error', () => {
+  it('should not show the loader after the API has returned an error', () => {
     // GIVEN
     component.urlHasNotBeenEntered = false;
     component.showLoader = true;
