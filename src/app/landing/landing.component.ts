@@ -29,6 +29,7 @@ export class LandingComponent implements OnInit {
   public optionsButtons: ControlOptions[] = [];
   public showLoader = false;
   public media = 'video';
+  public clipboardAvailable = !!navigator.clipboard;
 
   public formatOptionIds: string[] = this.optionButtonService.getFormatOptionsIds();
   public videoFormatOptionIds: string[] = this.optionButtonService.getVideoFormatOptionsIds();
@@ -178,5 +179,13 @@ export class LandingComponent implements OnInit {
     if (dlString !== null) {
       this.dl = JSON.parse(dlString);
     }
+  }
+
+  async readClipboard() {
+    if (!this.clipboardAvailable) {
+      return;
+    }
+    const url = await navigator.clipboard.readText();
+    this.videoForm.get(this.fgUrlKey)?.patchValue(url);
   }
 }

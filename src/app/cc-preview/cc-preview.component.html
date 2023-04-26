@@ -7,7 +7,7 @@
         <p *ngIf="error; else noError">{{ error }}</p>
         <ng-template #noError>
             <audio controls *ngIf="dl?.media === 'audio'; else video" >
-                <source src="{{ dl?.path }}" type="audio/{{ dl?.format }}">
+                <source src="{{ dl?.path }}" type="audio/mp3">
                 Your browser does not support HTML native playback of audio.
             </audio>
             <p>Content will expire after {{config.minutesToExpiry}} minutes!</p>

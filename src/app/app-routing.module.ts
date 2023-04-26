@@ -25,6 +25,10 @@ const routes: Routes = [
   {
     path: 'terms',
     component: CcTermsOfServiceComponent
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];
 
