@@ -134,6 +134,7 @@ export class LandingComponent implements OnInit {
   }
 
   private submitFormSuccess(download: DownloadDetails): void {
+    this.downloadErrorMessage = '';
     this.showLoader = false;
     this.dl = download;
     localStorage.setItem(this.localStorageDlKey, JSON.stringify(download));
@@ -141,6 +142,8 @@ export class LandingComponent implements OnInit {
   }
 
   private submitFormError(error: HttpErrorResponse): void {
+    this.dl = null;
+    this.clearLocalStorage();
     this.showLoader = false;
     this.downloadErrorMessage = error.message;
   }
@@ -171,14 +174,18 @@ export class LandingComponent implements OnInit {
   private setDownloadData(): void {
     const expiry = Number(localStorage.getItem(this.localStorageExpirationKey));
     if (!isNaN(expiry) && Math.floor((Date.now() - expiry) / 60000) > this.config.minutesToExpiry) {
-      localStorage.removeItem(this.localStorageDlKey);
-      localStorage.removeItem(this.localStorageExpirationKey);
+      this.clearLocalStorage();
       return;
     }
     const dlString = localStorage.getItem(this.localStorageDlKey);
     if (dlString !== null) {
       this.dl = JSON.parse(dlString);
     }
+  }
+
+  private clearLocalStorage(): void {
+    localStorage.removeItem(this.localStorageDlKey);
+    localStorage.removeItem(this.localStorageExpirationKey);
   }
 
   async readClipboard() {
